@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "./Header.module.css";
+import styles from "./Header.module.css";
 import { FaLessThan, FaGreaterThan } from "react-icons/fa6";
 import moment from "moment";
 
@@ -17,9 +17,9 @@ const Header = () => {
   const formattedDate = currentDate.format("MMMM YYYY").toUpperCase();
 
   return (
-    <header className={style.wrapper}>
+    <header className={styles.wrapper}>
       <div>{formattedDate}</div>
-      <div className={style.btns}>
+      <div className={styles.btns}>
         <FaLessThan onClick={handlePrevMonth} />
         <span>Today</span>
         <FaGreaterThan onClick={handleNextMonth} />
