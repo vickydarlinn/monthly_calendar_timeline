@@ -4,8 +4,7 @@ import moment from "moment";
 import styles from "./Calendar.module.css";
 import Cell from "../cell";
 
-const Calendar = () => {
-  const [currentDate, setCurrentDate] = useState(moment());
+const Calendar = ({ currentDate }) => {
   const startOfMonth = moment(currentDate).startOf("month");
   const endOfMonth = moment(currentDate).endOf("month");
   const dates = [];
