@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Cell.module.css";
 
 const Cell = ({
@@ -6,6 +5,9 @@ const Cell = ({
   width = "80px",
   title = null,
   isBold = false,
+  minWidth = null,
+  flexDirection = "row",
+  gap = 0,
 }) => {
   return (
     <div
@@ -14,6 +16,9 @@ const Cell = ({
         height,
         width,
         fontWeight: isBold ? "bold" : "regular",
+        minWidth: minWidth ? minWidth : "auto",
+        flexDirection: flexDirection,
+        gap: gap ? gap : "0px",
       }}
     >
       {title.length && title}

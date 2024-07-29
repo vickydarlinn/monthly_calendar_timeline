@@ -1,0 +1,10 @@
+.calendarHeader {
+  display: flex;
+  overflow: auto;
+  position: sticky;
+  top: 0;
+}
+::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
