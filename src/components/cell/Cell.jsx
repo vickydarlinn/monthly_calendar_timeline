@@ -4,10 +4,7 @@ const Cell = ({
   height = "80px",
   width = "80px",
   title = null,
-  isBold = false,
-  minWidth = null,
-  flexDirection = "row",
-  gap = 0,
+  styleProps = {},
 }) => {
   return (
     <div
@@ -15,13 +12,10 @@ const Cell = ({
       style={{
         height,
         width,
-        fontWeight: isBold ? "bold" : "regular",
-        minWidth: minWidth ? minWidth : "auto",
-        flexDirection: flexDirection,
-        gap: gap ? gap : "0px",
+        ...styleProps,
       }}
     >
-      {title.length && title}
+      {title}
     </div>
   );
 };

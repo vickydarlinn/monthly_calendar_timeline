@@ -1,7 +1,4 @@
-.wrapper {
-  border: 2px solid blueviolet;
+.resourceRow {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: max-content;
+  width: fit-content;
 }

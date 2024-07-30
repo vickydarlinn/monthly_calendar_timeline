@@ -2,13 +2,32 @@ import Cell from "../cell";
 import { resources } from "../../data";
 import styles from "./ResourceRow.module.css";
 
-const ResourceRow = () => {
+const ResourceRow = ({ dates }) => {
   return (
-    <div className={styles.wrapper}>
+    <>
       {resources.map((resource) => (
-        <Cell key={resource.id} title={resource.name} width="100%" />
+        <div key={resource.id} className={styles.resourceRow}>
+          <Cell
+            title={resource.name}
+            styleProps={{
+              minWidth: "120px",
+              position: "sticky",
+              left: "0px",
+              backgroundColor: "lightblue",
+            }}
+          />
+          {dates.map((date) => (
+            <Cell
+              key={date}
+              title={resource.name.split(" ")[1] + " " + date.format("D ")}
+              styleProps={{
+                minWidth: "100px",
+              }}
+            />
+          ))}
+        </div>
       ))}
-    </div>
+    </>
   );
 };
 

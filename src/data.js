@@ -33,5 +33,4 @@ export const events = [
     end: "2024-07-10T15:00:00",
     color: "blue",
   },
-  // add more events
 ];

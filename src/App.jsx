@@ -2,6 +2,7 @@ import { useState } from "react";
 import Calendar from "./components/calendar";
 import Header from "./components/header";
 import moment from "moment";
+import "./App.css";
 
 const App = () => {
   const [currentDate, setCurrentDate] = useState(moment());
@@ -15,14 +16,14 @@ const App = () => {
   };
 
   return (
-    <div>
+    <main className="main_wrapper">
       <Header
         currentDate={currentDate}
         handleNextMonth={handleNextMonth}
         handlePrevMonth={handlePrevMonth}
       />
       <Calendar currentDate={currentDate} />
-    </div>
+    </main>
   );
 };
 

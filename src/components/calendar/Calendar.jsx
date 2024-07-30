@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import ResourceRow from "../resourceRow";
 import moment from "moment";
 import styles from "./Calendar.module.css";
+import ResourceRow from "../resourceRow";
 import Cell from "../cell";
 
 const Calendar = ({ currentDate }) => {
@@ -16,23 +15,43 @@ const Calendar = ({ currentDate }) => {
   ) {
     dates.push(date.clone());
   }
-  return (
-    <div>
-      <div className={styles.calendarHeader}>
-        <Cell title=" " height="40px" minWidth="120px" />
 
-        {dates.map((date) => (
-          <Cell
-            key={date}
-            title={date.format("D ddd")}
-            height="40px"
-            minWidth="100px"
-          />
-        ))}
-      </div>
-      <ResourceRow />
+  return (
+    <div className={styles.calendar}>
+      <CalendarHeader dates={dates} />
+      <CalendarBody dates={dates} />
     </div>
   );
 };
 
 export default Calendar;
+
+const CalendarHeader = ({ dates }) => {
+  return (
+    <div className={styles.calendarHeader}>
+      <Cell
+        title=" "
+        height="40px"
+        styleProps={{
+          minWidth: "120px",
+          position: "sticky",
+          left: "0px",
+          backgroundColor: "lightblue",
+          zIndex: "10",
+        }}
+      />
+      {dates.map((date) => (
+        <Cell
+          key={date}
+          title={date.format("D ddd")}
+          height="40px"
+          styleProps={{
+            minWidth: "100px",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const CalendarBody = ({ dates }) => <ResourceRow dates={dates} />;
