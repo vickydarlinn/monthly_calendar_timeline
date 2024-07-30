@@ -1,0 +1,6 @@
+.event {
+  position: absolute;
+  height: 40px;
+  z-index: 5;
+  cursor: ew-resize;
+}

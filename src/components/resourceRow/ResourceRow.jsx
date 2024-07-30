@@ -1,8 +1,14 @@
+/* eslint-disable react/prop-types */
 import Cell from "../cell";
 import { resources } from "../../data";
 import styles from "./ResourceRow.module.css";
+import Event from "../event";
 
-const ResourceRow = ({ dates }) => {
+const ResourceRow = ({ dates, events }) => {
+  const getEventsForResource = (resourceId) => {
+    return events.filter((event) => event.resourceId === resourceId);
+  };
+
   return (
     <>
       {resources.map((resource) => (
@@ -16,15 +22,20 @@ const ResourceRow = ({ dates }) => {
               backgroundColor: "lightblue",
             }}
           />
-          {dates.map((date) => (
-            <Cell
-              key={date}
-              title={resource.name.split(" ")[1] + " " + date.format("D ")}
-              styleProps={{
-                minWidth: "100px",
-              }}
-            />
-          ))}
+          <div className={styles.eventContainer}>
+            {dates.map((date) => (
+              <Cell
+                key={date}
+                title=""
+                styleProps={{
+                  minWidth: "100px",
+                }}
+              />
+            ))}
+            {getEventsForResource(resource.id).map((event) => (
+              <Event key={event.id} event={event} dates={dates} />
+            ))}
+          </div>
         </div>
       ))}
     </>

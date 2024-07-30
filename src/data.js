@@ -33,4 +33,20 @@ export const events = [
     end: "2024-07-10T15:00:00",
     color: "blue",
   },
+  {
+    id: 3,
+    resourceId: 2,
+    title: "Event 1",
+    start: "2024-07-03T00:00:00",
+    end: "2024-07-03T12:00:00",
+    color: "red",
+  },
+  {
+    id: 4,
+    resourceId: 2,
+    title: "Event 4",
+    start: "2024-07-10T09:00:00",
+    end: "2024-07-10T15:00:00",
+    color: "lightblue",
+  },
 ];

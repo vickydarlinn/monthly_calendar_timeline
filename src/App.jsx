@@ -2,6 +2,7 @@ import { useState } from "react";
 import Calendar from "./components/calendar";
 import Header from "./components/header";
 import moment from "moment";
+import { events } from "./data";
 import "./App.css";
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
         handleNextMonth={handleNextMonth}
         handlePrevMonth={handlePrevMonth}
       />
-      <Calendar currentDate={currentDate} />
+      <Calendar currentDate={currentDate} events={events} />
     </main>
   );
 };

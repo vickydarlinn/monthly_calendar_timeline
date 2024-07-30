@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import moment from "moment";
 import styles from "./Calendar.module.css";
 import ResourceRow from "../resourceRow";
 import Cell from "../cell";
 
-const Calendar = ({ currentDate }) => {
+const Calendar = ({ currentDate, events }) => {
   const startOfMonth = moment(currentDate).startOf("month");
   const endOfMonth = moment(currentDate).endOf("month");
   const dates = [];
@@ -19,7 +20,7 @@ const Calendar = ({ currentDate }) => {
   return (
     <div className={styles.calendar}>
       <CalendarHeader dates={dates} />
-      <CalendarBody dates={dates} />
+      <CalendarBody dates={dates} events={events} />
     </div>
   );
 };
@@ -54,4 +55,6 @@ const CalendarHeader = ({ dates }) => {
   );
 };
 
-const CalendarBody = ({ dates }) => <ResourceRow dates={dates} />;
+const CalendarBody = ({ dates, events }) => (
+  <ResourceRow dates={dates} events={events} />
+);
