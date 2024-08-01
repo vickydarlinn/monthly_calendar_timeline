@@ -4,7 +4,7 @@ import styles from "./Calendar.module.css";
 import ResourceRow from "../resourceRow";
 import Cell from "../cell";
 
-const Calendar = ({ currentDate, events }) => {
+const Calendar = ({ currentDate, events, onEventChange }) => {
   const startOfMonth = moment(currentDate).startOf("month");
   const endOfMonth = moment(currentDate).endOf("month");
   const dates = [];
@@ -20,7 +20,11 @@ const Calendar = ({ currentDate, events }) => {
   return (
     <div className={styles.calendar}>
       <CalendarHeader dates={dates} />
-      <CalendarBody dates={dates} events={events} />
+      <CalendarBody
+        dates={dates}
+        events={events}
+        onEventChange={onEventChange}
+      />
     </div>
   );
 };
@@ -33,8 +37,9 @@ const CalendarHeader = ({ dates }) => {
       <Cell
         title=" "
         height="40px"
+        width="160px"
         styleProps={{
-          minWidth: "120px",
+          minWidth: "160px",
           position: "sticky",
           left: "0px",
           backgroundColor: "lightblue",
@@ -46,8 +51,9 @@ const CalendarHeader = ({ dates }) => {
           key={date}
           title={date.format("D ddd")}
           height="40px"
+          width=""
           styleProps={{
-            minWidth: "100px",
+            minWidth: "120px",
           }}
         />
       ))}
@@ -55,6 +61,6 @@ const CalendarHeader = ({ dates }) => {
   );
 };
 
-const CalendarBody = ({ dates, events }) => (
-  <ResourceRow dates={dates} events={events} />
+const CalendarBody = ({ dates, events, onEventChange }) => (
+  <ResourceRow dates={dates} events={events} onEventChange={onEventChange} />
 );

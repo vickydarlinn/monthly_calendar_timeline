@@ -2,17 +2,25 @@
 import { useEffect, useRef } from "react";
 import interact from "interactjs";
 import moment from "moment";
+
 import styles from "./Event.module.css";
 
-const Event = ({ event, dates }) => {
+const Event = ({ event: eventProp, dates, onEventChange }) => {
   const eventRef = useRef(null);
-
   useEffect(() => {
-    interact(eventRef.current).resizable({
+    const target = eventRef.current;
+
+    // Reset the transform and data-x on re-render
+    target.style.transform = "translateX(0px)";
+    target.dataset.x = "0";
+
+    const interactable = interact(eventRef.current).resizable({
       edges: { left: true, right: true, bottom: false, top: false },
+
       listeners: {
         move(event) {
           const target = event.target;
+
           let x = parseFloat(target.dataset.x) || 0;
           let width = parseFloat(target.dataset.width) || 0;
 
@@ -27,12 +35,47 @@ const Event = ({ event, dates }) => {
           target.dataset.x = x;
           target.dataset.width = width;
         },
+        end(event) {
+          const target = event.target;
+          const x = parseFloat(target.dataset.x) || 0;
+          const width = parseFloat(target.dataset.width) || 0;
+
+          console.log(
+            `Resize ended. New width: ${width}px, New X position: ${x}px`
+          );
+
+          const updatedStart = updateTimestamp(x);
+          const updatedEnd = updateTimestamp(x + width);
+
+          console.log(`Updated start: ${updatedStart}`);
+          console.log(`Updated end: ${updatedEnd}`);
+
+          const updatedEvent = {
+            ...eventProp,
+            start: updatedStart.format("YYYY-MM-DDTHH:mm:ss"),
+            end: updatedEnd.format("YYYY-MM-DDTHH:mm:ss"),
+          };
+          onEventChange(updatedEvent);
+        },
       },
     });
-  }, []);
 
-  const leftPosition = moment(event.start).diff(dates[0], "days") * 100; // Assuming each day is 100px wide
-  const width = moment(event.end).diff(moment(event.start), "hours") * 4; // Assuming each hour is 4px wide
+    return () => interactable.unset();
+  }, [eventProp, onEventChange]);
+
+  console.log(eventProp);
+
+  function updateTimestamp(position) {
+    const startDate = moment(eventProp.start);
+    const updatedDate = startDate.add(position / 5, "hours");
+    return updatedDate;
+  }
+
+  const leftPosition = moment(eventProp.start).diff(dates[0], "hours") * 5;
+  console.log(leftPosition);
+
+  const width = moment(eventProp.end).diff(eventProp.start, "hours") * 5;
+  console.log(width);
 
   return (
     <div
@@ -42,15 +85,14 @@ const Event = ({ event, dates }) => {
         position: "absolute",
         left: `${leftPosition}px`,
         width: `${width}px`,
-        backgroundColor: event.color,
+        backgroundColor: eventProp.color,
         height: "40px",
         zIndex: 5,
-        transform: "translateX(0px)",
       }}
       data-x="0"
       data-width={`${width}`}
     >
-      {event.title}
+      {eventProp.title}
     </div>
   );
 };

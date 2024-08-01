@@ -3,4 +3,5 @@
   height: 40px;
   z-index: 5;
   cursor: ew-resize;
+  transform: translateX(0px);
 }
