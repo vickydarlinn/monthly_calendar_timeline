@@ -119,7 +119,6 @@ const Event = ({ event: eventProp, dates, onEventChange, color }) => {
         width: `${width}px`,
         top: `${10 + eventProp.level * 50}px`,
         height: "40px",
-        zIndex: 5,
         backgroundColor: color,
       }}
       data-x="0"

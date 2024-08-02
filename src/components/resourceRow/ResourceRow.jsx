@@ -23,7 +23,8 @@ const ResourceRow = ({ dates, events, onEventChange, resources }) => {
               minWidth: "160px",
               position: "sticky",
               left: "0px",
-              backgroundColor: "lightblue",
+              backgroundColor: "white",
+              zIndex: 30,
             }}
           />
           <div className={styles.eventContainer}>

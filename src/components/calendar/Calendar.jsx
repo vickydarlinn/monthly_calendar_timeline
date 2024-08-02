@@ -43,8 +43,8 @@ const CalendarHeader = ({ dates }) => {
           minWidth: "160px",
           position: "sticky",
           left: "0px",
-          backgroundColor: "lightblue",
-          zIndex: "10",
+          backgroundColor: "white",
+          zIndex: 55,
         }}
       />
       {dates.map((date) => (
@@ -55,6 +55,7 @@ const CalendarHeader = ({ dates }) => {
           width=""
           styleProps={{
             minWidth: "120px",
+            backgroundColor: "white",
           }}
         />
       ))}
