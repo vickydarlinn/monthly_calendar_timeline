@@ -12,7 +12,11 @@ const ResourceRow = ({ dates, events, onEventChange }) => {
   return (
     <>
       {resources.map((resource) => (
-        <div key={resource.id} className={styles.resourceRow}>
+        <div
+          key={resource.id}
+          className={styles.resourceRow}
+          data-resource-id={`${resource.id}`}
+        >
           <Cell
             title={resource.name}
             styleProps={{

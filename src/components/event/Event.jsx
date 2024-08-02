@@ -7,6 +7,7 @@ import styles from "./Event.module.css";
 
 const Event = ({ event: eventProp, dates, onEventChange }) => {
   const eventRef = useRef(null);
+
   useEffect(() => {
     const target = eventRef.current;
 
@@ -40,15 +41,8 @@ const Event = ({ event: eventProp, dates, onEventChange }) => {
           const x = parseFloat(target.dataset.x) || 0;
           const width = parseFloat(target.dataset.width) || 0;
 
-          console.log(
-            `Resize ended. New width: ${width}px, New X position: ${x}px`
-          );
-
           const updatedStart = updateTimestamp(x);
           const updatedEnd = updateTimestamp(x + width);
-
-          console.log(`Updated start: ${updatedStart}`);
-          console.log(`Updated end: ${updatedEnd}`);
 
           const updatedEvent = {
             ...eventProp,
@@ -63,7 +57,51 @@ const Event = ({ event: eventProp, dates, onEventChange }) => {
     return () => interactable.unset();
   }, [eventProp, onEventChange]);
 
-  console.log(eventProp);
+  useEffect(() => {
+    const position = { x: 0, y: 0 };
+
+    interact(eventRef.current).draggable({
+      listeners: {
+        start(event) {
+          console.log(event);
+        },
+        move(event) {
+          position.x += event.dx;
+          position.y += event.dy;
+          event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+        },
+        end(event) {
+          const target = event.target;
+          const rect = target.getBoundingClientRect();
+          const resourceElements =
+            document.querySelectorAll("[data-resource-id]");
+
+          resourceElements.forEach((resourceEl) => {
+            const resourceRect = resourceEl.getBoundingClientRect();
+            const middle = (rect.top + rect.bottom) / 2;
+            if (middle >= resourceRect.top && middle < resourceRect.bottom) {
+              const newResourceId = parseInt(
+                resourceEl.getAttribute("data-resource-id")
+              );
+              console.log(newResourceId);
+
+              const width = parseFloat(target.dataset.width) || 0;
+              const updatedStart = updateTimestamp(position.x);
+              const updatedEnd = updateTimestamp(position.x + width);
+
+              const updatedEvent = {
+                ...eventProp,
+                start: updatedStart.format("YYYY-MM-DDTHH:mm:ss"),
+                end: updatedEnd.format("YYYY-MM-DDTHH:mm:ss"),
+                resourceId: newResourceId,
+              };
+              onEventChange(updatedEvent);
+            }
+          });
+        },
+      },
+    });
+  }, [eventProp, onEventChange]);
 
   function updateTimestamp(position) {
     const startDate = moment(eventProp.start);
@@ -72,10 +110,8 @@ const Event = ({ event: eventProp, dates, onEventChange }) => {
   }
 
   const leftPosition = moment(eventProp.start).diff(dates[0], "hours") * 5;
-  console.log(leftPosition);
 
   const width = moment(eventProp.end).diff(eventProp.start, "hours") * 5;
-  console.log(width);
 
   return (
     <div
