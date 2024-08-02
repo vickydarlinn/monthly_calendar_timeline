@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Calendar from "./components/calendar";
 import Header from "./components/header";
 import moment from "moment";
@@ -8,34 +8,47 @@ import { assignEventLevels } from "./utils/levelChecker";
 
 const App = () => {
   const [currentDate, setCurrentDate] = useState(moment());
-  const [resources, setResources] = useState(initialResources);
+  const [resources, setResources] = useState([]);
   const [events, setEvents] = useState([]);
+
   useEffect(() => {
-    // Try to load events from localStorage
     const storedEvents = localStorage.getItem("events");
+    const storedResources = localStorage.getItem("resources");
+
     if (storedEvents) {
       setEvents(JSON.parse(storedEvents));
     } else {
-      // If no events in localStorage, use initial events
       setEvents(initialEvents);
+    }
+
+    if (storedResources) {
+      setResources(JSON.parse(storedResources));
+    } else {
+      setResources(initialResources);
     }
   }, []);
 
   useEffect(() => {
-    // Save events to localStorage whenever events change
     localStorage.setItem("events", JSON.stringify(events));
   }, [events]);
+
   useEffect(() => {
-    const { events: leveledEvents, updatedResources } = assignEventLevels(
-      events,
-      resources
-    );
-    if (leveledEvents.length) {
+    localStorage.setItem("resources", JSON.stringify(resources));
+  }, [resources]);
+
+  const leveledData = useMemo(() => {
+    return assignEventLevels(events, resources);
+  }, [events, resources]);
+
+  useEffect(() => {
+    const { events: leveledEvents, updatedResources } = leveledData;
+    if (JSON.stringify(leveledEvents) !== JSON.stringify(events)) {
       setEvents(leveledEvents);
+    }
+    if (JSON.stringify(updatedResources) !== JSON.stringify(resources)) {
       setResources(updatedResources);
     }
-  }, [events]);
-  console.log(events);
+  }, [leveledData, events, resources]);
 
   const handleNextMonth = () => {
     setCurrentDate((prevDate) => prevDate.clone().add(1, "months"));
@@ -53,12 +66,23 @@ const App = () => {
     );
   };
 
+  const handleCreateResource = (newResource) => {
+    setResources((prev) => [...prev, newResource]);
+  };
+
+  const handleCreateEvent = (newEvent) => {
+    setEvents([...events, newEvent]);
+  };
+
   return (
     <main className="main_wrapper">
       <Header
         currentDate={currentDate}
         handleNextMonth={handleNextMonth}
         handlePrevMonth={handlePrevMonth}
+        handleCreateResource={handleCreateResource}
+        handleCreateEvent={handleCreateEvent}
+        resources={resources}
       />
       <Calendar
         currentDate={currentDate}

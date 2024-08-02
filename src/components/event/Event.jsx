@@ -5,7 +5,7 @@ import moment from "moment";
 
 import styles from "./Event.module.css";
 
-const Event = ({ event: eventProp, dates, onEventChange }) => {
+const Event = ({ event: eventProp, dates, onEventChange, color }) => {
   const eventRef = useRef(null);
 
   useEffect(() => {
@@ -118,9 +118,9 @@ const Event = ({ event: eventProp, dates, onEventChange }) => {
         left: `${leftPosition}px`,
         width: `${width}px`,
         top: `${10 + eventProp.level * 50}px`,
-        backgroundColor: eventProp.color,
         height: "40px",
         zIndex: 5,
+        backgroundColor: color,
       }}
       data-x="0"
       data-width={`${width}`}

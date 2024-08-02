@@ -15,7 +15,6 @@ const ResourceRow = ({ dates, events, onEventChange, resources }) => {
           key={resource.id}
           className={styles.resourceRow}
           data-resource-id={`${resource.id}`}
-          style={{}}
         >
           <Cell
             title={resource.name}
@@ -44,6 +43,7 @@ const ResourceRow = ({ dates, events, onEventChange, resources }) => {
                 event={event}
                 dates={dates}
                 onEventChange={onEventChange}
+                color={resource.color}
               />
             ))}
           </div>
