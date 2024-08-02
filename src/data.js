@@ -1,19 +1,19 @@
 export const resources = [
-  { id: 1, name: "Resource A" },
-  { id: 2, name: "Resource B" },
-  { id: 3, name: "Resource C" },
-  { id: 4, name: "Resource D" },
-  { id: 5, name: "Resource E" },
-  { id: 6, name: "Resource F" },
-  { id: 7, name: "Resource G" },
-  { id: 8, name: "Resource H" },
-  { id: 9, name: "Resource I" },
-  { id: 10, name: "Resource J" },
-  { id: 11, name: "Resource K" },
-  { id: 12, name: "Resource L" },
-  { id: 13, name: "Resource M" },
-  { id: 14, name: "Resource N" },
-  { id: 15, name: "Resource O" },
+  { id: 1, level: 0, name: "Resource A" },
+  { id: 2, level: 0, name: "Resource B" },
+  { id: 3, level: 0, name: "Resource C" },
+  { id: 4, level: 0, name: "Resource D" },
+  { id: 5, level: 0, name: "Resource E" },
+  { id: 6, level: 0, name: "Resource F" },
+  { id: 7, level: 0, name: "Resource G" },
+  { id: 8, level: 0, name: "Resource H" },
+  { id: 9, level: 0, name: "Resource I" },
+  { id: 10, level: 0, name: "Resource J" },
+  { id: 11, level: 0, name: "Resource K" },
+  { id: 12, level: 0, name: "Resource L" },
+  { id: 13, level: 0, name: "Resource M" },
+  { id: 14, level: 0, name: "Resource N" },
+  { id: 15, level: 0, name: "Resource O" },
 ];
 
 export const events = [
@@ -24,6 +24,7 @@ export const events = [
     start: "2024-08-03T00:00:00",
     end: "2024-08-03T12:00:00",
     color: "red",
+    level: 0,
   },
   {
     id: 2,
@@ -32,6 +33,7 @@ export const events = [
     start: "2024-08-10T09:00:00",
     end: "2024-08-10T15:00:00",
     color: "blue",
+    level: 0,
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ export const events = [
     start: "2024-08-03T00:00:00",
     end: "2024-08-03T12:00:00",
     color: "red",
+    level: 0,
   },
   {
     id: 4,
@@ -48,5 +51,6 @@ export const events = [
     start: "2024-08-10T09:00:00",
     end: "2024-08-10T15:00:00",
     color: "lightblue",
+    level: 0,
   },
 ];

@@ -62,9 +62,6 @@ const Event = ({ event: eventProp, dates, onEventChange }) => {
 
     interact(eventRef.current).draggable({
       listeners: {
-        start(event) {
-          console.log(event);
-        },
         move(event) {
           position.x += event.dx;
           position.y += event.dy;
@@ -83,7 +80,6 @@ const Event = ({ event: eventProp, dates, onEventChange }) => {
               const newResourceId = parseInt(
                 resourceEl.getAttribute("data-resource-id")
               );
-              console.log(newResourceId);
 
               const width = parseFloat(target.dataset.width) || 0;
               const updatedStart = updateTimestamp(position.x);
@@ -121,6 +117,7 @@ const Event = ({ event: eventProp, dates, onEventChange }) => {
         position: "absolute",
         left: `${leftPosition}px`,
         width: `${width}px`,
+        top: `${10 + eventProp.level * 50}px`,
         backgroundColor: eventProp.color,
         height: "40px",
         zIndex: 5,

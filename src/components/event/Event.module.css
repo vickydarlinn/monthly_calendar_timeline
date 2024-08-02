@@ -4,4 +4,9 @@
   z-index: 5;
   cursor: ew-resize;
   transform: translateX(0px);
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 10px;
 }

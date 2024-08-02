@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
 import Cell from "../cell";
-import { resources } from "../../data";
 import styles from "./ResourceRow.module.css";
 import Event from "../event";
 
-const ResourceRow = ({ dates, events, onEventChange }) => {
+const ResourceRow = ({ dates, events, onEventChange, resources }) => {
   const getEventsForResource = (resourceId) => {
     return events.filter((event) => event.resourceId === resourceId);
   };
-
+  console.log(resources);
   return (
     <>
       {resources.map((resource) => (
@@ -16,9 +15,11 @@ const ResourceRow = ({ dates, events, onEventChange }) => {
           key={resource.id}
           className={styles.resourceRow}
           data-resource-id={`${resource.id}`}
+          style={{}}
         >
           <Cell
             title={resource.name}
+            height={`${80 + resource.level * 50}px`}
             styleProps={{
               minWidth: "160px",
               position: "sticky",
@@ -30,6 +31,7 @@ const ResourceRow = ({ dates, events, onEventChange }) => {
             {dates.map((date) => (
               <Cell
                 key={date}
+                height={`${80 + resource.level * 50}px`}
                 title=""
                 styleProps={{
                   minWidth: "120px",
