@@ -61,6 +61,13 @@ const Event = ({ event: eventProp, dates, onEventChange, color }) => {
     const position = { x: 0, y: 0 };
 
     interact(eventRef.current).draggable({
+      modifiers: [
+        interact.modifiers.restrict({
+          restriction: "[data-calendar]", // Restrict to elements with data-calendar attribute
+          elementRect: { top: 40, left: 160, bottom: 1, right: 1 },
+          endOnly: true,
+        }),
+      ],
       listeners: {
         move(event) {
           position.x += event.dx;

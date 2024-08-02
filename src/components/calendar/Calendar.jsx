@@ -18,7 +18,7 @@ const Calendar = ({ currentDate, events, onEventChange, resources }) => {
   }
 
   return (
-    <div className={styles.calendar}>
+    <div className={styles.calendar} data-calendar="calendar">
       <CalendarHeader dates={dates} />
       <CalendarBody
         dates={dates}
