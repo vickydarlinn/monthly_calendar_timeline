@@ -4,7 +4,7 @@ This project is a desktop view replica of the Mobiscroll monthly calendar timeli
 
 ## Live Demo
 
-[Live Demo Link](#)
+[Live Demo Link](https://monthly-calendar-timeline.vercel.app/)
 
 ## Features
 
@@ -29,13 +29,13 @@ This project is a desktop view replica of the Mobiscroll monthly calendar timeli
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/your-username/mobiscroll-calendar-timeline.git
+git clone https://github.com/vickydarlinn/monthly_calendar_timeline.git
 ```
 
 2. Navigate to the project directory:
 
 ```sh
-cd mobiscroll-calendar-timeline
+cd monthly_calendar_timeline
 ```
 
 3. Install the dependencies:

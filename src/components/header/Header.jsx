@@ -3,7 +3,6 @@ import styles from "./Header.module.css";
 import { FaLessThan, FaGreaterThan } from "react-icons/fa6";
 import Modal from "../modal";
 import { useState } from "react";
-import uuid from "uuid-int";
 import moment from "moment";
 import Button from "../button";
 
@@ -75,7 +74,6 @@ const EventModal = ({ handleCreateEvent, resources, onClose }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [selectedResource, setSelectedResource] = useState("");
-  const generator = uuid(0);
 
   const eventCreateHandler = () => {
     if (!selectedResource) return alert("Please select a resource");
@@ -91,7 +89,7 @@ const EventModal = ({ handleCreateEvent, resources, onClose }) => {
     }
 
     const newEvent = {
-      id: generator.uuid(),
+      id: moment().seconds(),
       title: eventName,
       start: moment(startTime).format("YYYY-MM-DDTHH:mm:ss"),
       end: moment(endTime).format("YYYY-MM-DDTHH:mm:ss"),
@@ -154,12 +152,11 @@ const EventModal = ({ handleCreateEvent, resources, onClose }) => {
 const ResourceModal = ({ handleCreateResource, onClose }) => {
   const [resourceName, setResourceName] = useState("");
   const [color, setColor] = useState("");
-  const generator = uuid(0);
   const resourceCreateHandler = () => {
     if (resourceName == "") return alert("Please add resource name");
     if (color == "") return alert("Please select a color");
     const newResource = {
-      id: generator.uuid(),
+      id: moment().second(),
       level: 0,
       name: resourceName,
       color: color,
