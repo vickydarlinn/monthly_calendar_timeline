@@ -74,6 +74,16 @@ const App = () => {
     setEvents([...events, newEvent]);
   };
 
+  const filteredEvents = useMemo(() => {
+    const startOfMonth = currentDate.clone().startOf("month");
+    const endOfMonth = currentDate.clone().endOf("month");
+
+    return events.filter((event) => {
+      const eventDate = moment(event.date);
+      return eventDate.isBetween(startOfMonth, endOfMonth, null, "[]");
+    });
+  }, [events, currentDate]);
+
   return (
     <main className="main_wrapper">
       <Header
@@ -86,7 +96,7 @@ const App = () => {
       />
       <Calendar
         currentDate={currentDate}
-        events={events}
+        events={filteredEvents}
         onEventChange={handleEventChange}
         resources={resources}
       />

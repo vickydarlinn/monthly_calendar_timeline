@@ -64,7 +64,7 @@ const Event = ({ event: eventProp, dates, onEventChange, color }) => {
       modifiers: [
         interact.modifiers.restrict({
           restriction: "[data-calendar]", // Restrict to elements with data-calendar attribute
-          elementRect: { top: 40, left: 160, bottom: 1, right: 1 },
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
           endOnly: true,
         }),
       ],
