@@ -4,7 +4,13 @@ import styles from "./Calendar.module.css";
 import ResourceRow from "../resourceRow";
 import Cell from "../cell";
 
-const Calendar = ({ currentDate, events, onEventChange, resources }) => {
+const Calendar = ({
+  currentDate,
+  events,
+  onEventChange,
+  resources,
+  handleDeleteEvent,
+}) => {
   const startOfMonth = moment(currentDate).startOf("month");
   const endOfMonth = moment(currentDate).endOf("month");
   const dates = [];
@@ -25,6 +31,7 @@ const Calendar = ({ currentDate, events, onEventChange, resources }) => {
         events={events}
         onEventChange={onEventChange}
         resources={resources}
+        handleDeleteEvent={handleDeleteEvent}
       />
     </div>
   );
@@ -63,11 +70,18 @@ const CalendarHeader = ({ dates }) => {
   );
 };
 
-const CalendarBody = ({ dates, events, onEventChange, resources }) => (
+const CalendarBody = ({
+  dates,
+  events,
+  onEventChange,
+  resources,
+  handleDeleteEvent,
+}) => (
   <ResourceRow
     dates={dates}
     events={events}
     onEventChange={onEventChange}
     resources={resources}
+    handleDeleteEvent={handleDeleteEvent}
   />
 );

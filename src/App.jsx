@@ -73,6 +73,11 @@ const App = () => {
   const handleCreateEvent = (newEvent) => {
     setEvents([...events, newEvent]);
   };
+  const handleDeleteEvent = (eventId) => {
+    setEvents((prevEvents) =>
+      prevEvents.filter((event) => event.id !== eventId)
+    );
+  };
 
   const filteredEvents = useMemo(() => {
     const startOfMonth = currentDate.clone().startOf("month");
@@ -93,12 +98,14 @@ const App = () => {
         handleCreateResource={handleCreateResource}
         handleCreateEvent={handleCreateEvent}
         resources={resources}
+        setCurrentDate={setCurrentDate}
       />
       <Calendar
         currentDate={currentDate}
         events={filteredEvents}
         onEventChange={handleEventChange}
         resources={resources}
+        handleDeleteEvent={handleDeleteEvent}
       />
     </main>
   );

@@ -1,11 +1,21 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 import moment from "moment";
+import { MdDelete } from "react-icons/md";
 
 import styles from "./Event.module.css";
+import Modal from "../modal";
 
-const Event = ({ event: eventProp, dates, onEventChange, color }) => {
+const Event = ({
+  event: eventProp,
+  dates,
+  onEventChange,
+  color,
+  handleDeleteEvent,
+}) => {
+  const [showDeleteIcon, setShowDeleteIcon] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const eventRef = useRef(null);
 
   useEffect(() => {
@@ -17,7 +27,11 @@ const Event = ({ event: eventProp, dates, onEventChange, color }) => {
 
     const interactable = interact(eventRef.current).resizable({
       edges: { left: true, right: true, bottom: false, top: false },
-
+      modifiers: [
+        interact.modifiers.restrictSize({
+          min: { width: 20 }, // Set minimum width and height
+        }),
+      ],
       listeners: {
         move(event) {
           const target = event.target;
@@ -106,33 +120,57 @@ const Event = ({ event: eventProp, dates, onEventChange, color }) => {
     });
   }, [eventProp, onEventChange]);
 
-  function updateTimestamp(position) {
+  const updateTimestamp = (position) => {
     const startDate = moment(eventProp.start);
     const updatedDate = startDate.add(position / 5, "hours");
     return updatedDate;
-  }
+  };
+
+  const deleteEventHandler = () => {
+    handleDeleteEvent(eventProp.id);
+    setShowDeleteModal(false);
+  };
 
   const leftPosition = moment(eventProp.start).diff(dates[0], "hours") * 5;
-
   const width = moment(eventProp.end).diff(eventProp.start, "hours") * 5;
 
   return (
-    <div
-      ref={eventRef}
-      className={styles.event}
-      style={{
-        position: "absolute",
-        left: `${leftPosition}px`,
-        width: `${width}px`,
-        top: `${10 + eventProp.level * 50}px`,
-        height: "40px",
-        backgroundColor: color,
-      }}
-      data-x="0"
-      data-width={`${width}`}
-    >
-      {eventProp.title}
-    </div>
+    <>
+      <div
+        onMouseEnter={() => setShowDeleteIcon(true)}
+        onMouseLeave={() => setShowDeleteIcon(false)}
+        ref={eventRef}
+        className={styles.event}
+        style={{
+          position: "absolute",
+          left: `${leftPosition}px`,
+          width: `${width}px`,
+          top: `${10 + eventProp.level * 50}px`,
+          height: "40px",
+          backgroundColor: color,
+        }}
+        data-x="0"
+        data-width={`${width}`}
+      >
+        {eventProp.title}
+
+        {showDeleteIcon && (
+          <span className={styles.delete_action}>
+            <MdDelete onClick={() => setShowDeleteModal(true)} />
+          </span>
+        )}
+      </div>
+
+      {showDeleteModal && (
+        <Modal
+          title="Are You Sure?"
+          onSubmit={deleteEventHandler}
+          onClose={() => setShowDeleteModal(false)}
+        >
+          <p>Do you really want to delete this event?</p>
+        </Modal>
+      )}
+    </>
   );
 };
 

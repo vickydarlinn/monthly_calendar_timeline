@@ -13,6 +13,7 @@ const Header = ({
   handleCreateEvent,
   handleCreateResource,
   resources,
+  setCurrentDate,
 }) => {
   const formattedDate = currentDate.format("MMMM YYYY").toUpperCase();
   const [isResourceModalOpen, setIsResourceModalOpen] = useState(false);
@@ -30,7 +31,7 @@ const Header = ({
         </div>
         <div className={styles.btns}>
           <FaLessThan onClick={handlePrevMonth} />
-          <span>Today</span>
+          <span onClick={() => setCurrentDate(moment())}>Today</span>
           <FaGreaterThan onClick={handleNextMonth} />
         </div>
       </header>
@@ -62,11 +63,15 @@ const EventModal = ({ handleCreateEvent, resources, onClose }) => {
 
   const eventCreateHandler = () => {
     if (!selectedResource) return alert("Please select a resource");
+    if (eventName == "") return alert("Please add a title");
+
+    if (startTime == "" || endTime == "") return alert("Please select time");
     const start = moment(startTime);
     const end = moment(endTime);
 
     if (end.isBefore(start)) {
       alert("End date cannot be earlier than start date.");
+      return;
     }
 
     const newEvent = {
@@ -77,7 +82,6 @@ const EventModal = ({ handleCreateEvent, resources, onClose }) => {
       resourceId: +selectedResource,
       level: 0,
     };
-    console.log(newEvent);
     handleCreateEvent(newEvent);
     onClose();
   };
@@ -131,6 +135,8 @@ const ResourceModal = ({ handleCreateResource, onClose }) => {
   const [color, setColor] = useState("");
   const generator = uuid(0);
   const resourceCreateHandler = () => {
+    if (resourceName == "") return alert("Please add resource name");
+    if (color == "") return alert("Please select a color");
     const newResource = {
       id: generator.uuid(),
       level: 0,

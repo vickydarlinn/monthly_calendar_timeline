@@ -10,3 +10,11 @@
   white-space: nowrap;
   padding-left: 10px;
 }
+.delete_action {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  overflow: auto;
+}

@@ -3,7 +3,13 @@ import Cell from "../cell";
 import styles from "./ResourceRow.module.css";
 import Event from "../event";
 
-const ResourceRow = ({ dates, events, onEventChange, resources }) => {
+const ResourceRow = ({
+  dates,
+  events,
+  onEventChange,
+  resources,
+  handleDeleteEvent,
+}) => {
   const getEventsForResource = (resourceId) => {
     return events.filter((event) => event.resourceId === resourceId);
   };
@@ -45,6 +51,7 @@ const ResourceRow = ({ dates, events, onEventChange, resources }) => {
                 dates={dates}
                 onEventChange={onEventChange}
                 color={resource.color}
+                handleDeleteEvent={handleDeleteEvent}
               />
             ))}
           </div>
