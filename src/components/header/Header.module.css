@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
   font-size: 2rem;
   position: fixed;
@@ -15,4 +16,8 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+}
+.action_buttons {
+  display: flex;
+  gap: 20px;
 }

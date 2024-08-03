@@ -62,7 +62,8 @@ const CalendarHeader = ({ dates }) => {
           width=""
           styleProps={{
             minWidth: "120px",
-            backgroundColor: moment().isSame(date, "day") ? "blue" : "white",
+            backgroundColor: moment().isSame(date, "day") ? "black" : "white",
+            color: moment().isSame(date, "day") ? "white" : "black",
           }}
         />
       ))}

@@ -11,9 +11,9 @@ export const resources = [
   { id: 10, level: 0, color: "#E9B9B6", name: "Resource J" },
   { id: 11, level: 0, color: "#F8CDF0", name: "Resource K" },
   { id: 12, level: 0, color: "#CCE6BC", name: "Resource L" },
-  { id: 13, level: 0, color: "#F8CDF0", name: "Resource M" },
-  { id: 14, level: 0, color: "#C9D7F1", name: "Resource N" },
-  { id: 15, level: 0, color: "#C9EDF4", name: "Resource O" },
+  // { id: 13, level: 0, color: "#F8CDF0", name: "Resource M" },
+  // { id: 14, level: 0, color: "#C9D7F1", name: "Resource N" },
+  // { id: 15, level: 0, color: "#C9EDF4", name: "Resource O" },
 ];
 
 export const events = [
@@ -22,7 +22,7 @@ export const events = [
     resourceId: 1,
     title: "Event 1",
     start: "2024-08-03T00:00:00",
-    end: "2024-08-03T12:00:00",
+    end: "2024-08-06T12:00:00",
     level: 0,
   },
   {
@@ -30,7 +30,7 @@ export const events = [
     resourceId: 2,
     title: "Event 2",
     start: "2024-08-10T09:00:00",
-    end: "2024-08-10T15:00:00",
+    end: "2024-08-13T15:00:00",
     level: 0,
   },
   {
@@ -38,15 +38,15 @@ export const events = [
     resourceId: 2,
     title: "Event 3",
     start: "2024-08-03T00:00:00",
-    end: "2024-08-03T12:00:00",
+    end: "2024-08-07T12:00:00",
     level: 0,
   },
   {
     id: 4,
     resourceId: 2,
     title: "Event 4",
-    start: "2024-08-10T09:00:00",
-    end: "2024-08-10T15:00:00",
+    start: "2024-08-22T09:00:00",
+    end: "2024-08-25T15:00:00",
     level: 0,
   },
 ];

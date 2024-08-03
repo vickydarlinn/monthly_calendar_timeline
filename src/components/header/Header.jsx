@@ -5,6 +5,7 @@ import Modal from "../modal";
 import { useState } from "react";
 import uuid from "uuid-int";
 import moment from "moment";
+import Button from "../button";
 
 const Header = ({
   currentDate,
@@ -23,11 +24,26 @@ const Header = ({
     <>
       <header className={styles.wrapper}>
         <div>{formattedDate}</div>
-        <div>
-          <button onClick={() => setIsEventModalOpen(true)}>Add Event</button>
-          <button onClick={() => setIsResourceModalOpen(true)}>
-            Add Resource
-          </button>
+        <div className={styles.action_buttons}>
+          <Button
+            buttonText="Add Event"
+            backgroundColor="black"
+            textColor="white"
+            onClick={() => setIsEventModalOpen(true)}
+            customStyle={{
+              width: "150px",
+            }}
+          />
+
+          <Button
+            buttonText="Add Resource"
+            backgroundColor="black"
+            textColor="white"
+            onClick={() => setIsResourceModalOpen(true)}
+            customStyle={{
+              width: "150px",
+            }}
+          />
         </div>
         <div className={styles.btns}>
           <FaLessThan onClick={handlePrevMonth} />
@@ -87,7 +103,12 @@ const EventModal = ({ handleCreateEvent, resources, onClose }) => {
   };
 
   return (
-    <Modal title="Add Event" onSubmit={eventCreateHandler} onClose={onClose}>
+    <Modal
+      title="Add Event"
+      onSubmit={eventCreateHandler}
+      onClose={onClose}
+      actionText="Add Event"
+    >
       <div>
         <label>Event Name:</label>
         <input
@@ -152,6 +173,7 @@ const ResourceModal = ({ handleCreateResource, onClose }) => {
       title="Add Resource"
       onSubmit={resourceCreateHandler}
       onClose={onClose}
+      actionText="Add Resource"
     >
       <div>
         <label>Resource Name:</label>

@@ -166,9 +166,8 @@ const Event = ({
           title="Are You Sure?"
           onSubmit={deleteEventHandler}
           onClose={() => setShowDeleteModal(false)}
-        >
-          <p>Do you really want to delete this event?</p>
-        </Modal>
+          actionText="Delete"
+        />
       )}
     </>
   );
